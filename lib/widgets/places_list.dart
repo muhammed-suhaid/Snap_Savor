@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_savor/models/place.dart';
+import 'package:snap_savor/screens/place_detail.dart';
 
 class PlacesList extends StatelessWidget {
   const PlacesList({
@@ -13,12 +14,13 @@ class PlacesList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (places.isEmpty) {
       return Center(
-          child: Text(
-        'No places addded yet!', 
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
-            ),
-      ));
+        child: Text(
+          'No places addded yet!',
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+        ),
+      );
     }
     return ListView.builder(
       itemCount: places.length,
@@ -29,6 +31,15 @@ class PlacesList extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onBackground,
               ),
         ),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PlaceDetailScreen(
+                place: places[index],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
