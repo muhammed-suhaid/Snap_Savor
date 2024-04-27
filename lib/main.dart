@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Great Places',
+      title: 'Snap Savor',
+      debugShowCheckedModeBanner: false,
       theme: theme,
       home: const PlacesScreen(),
     );
