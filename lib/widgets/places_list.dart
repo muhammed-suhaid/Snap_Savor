@@ -37,6 +37,9 @@ class PlacesList extends StatelessWidget {
         ),
         subtitle: Text(
           '${places[index].location!.latitude}  ${places[index].location!.longitude}',
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
         ),
         splashColor: Colors.transparent,
         onTap: () {
