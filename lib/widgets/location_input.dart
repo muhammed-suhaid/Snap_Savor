@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:snap_savor/models/place.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  const LocationInput({
+    super.key,
+    required this.selectLocation,
+  });
+
+  final void Function(PlaceLocation location) selectLocation;
 
   @override
   State<LocationInput> createState() => _LocationInputState();
 }
 
 class _LocationInputState extends State<LocationInput> {
-  Location? _pickedLocation;
+  PlaceLocation? _pickedLocation;
   var _isGettingLocation = false;
+
+  String get locationImage {
+    if (_pickedLocation == null) {
+      return '';
+    }
+    final lat = _pickedLocation!.latitude;
+    final lng = _pickedLocation!.longitude;
+    // return 'Here place the google map image api.';
+    return '$lat \n $lng';
+  }
 
   void _getCurrentLocation() async {
     Location location = Location();
@@ -38,11 +54,27 @@ class _LocationInputState extends State<LocationInput> {
       _isGettingLocation = true;
     });
     locationData = await location.getLocation();
+    final lat = locationData.latitude;
+    final lng = locationData.longitude;
+
+    if (lat == null || lng == null) {
+      return;
+    }
+    ////////// ***** instal http package and also need a google map api ***** //////////
+    // final url = Uri.parse('Here it will have the google map api');
+    // final response = await http.get(url);
+    // final resData = json.decode(response.body);
+    // final address = resData['result'][0]['formatted_address'];
     setState(() {
+      _pickedLocation = PlaceLocation(
+        longitude: lng,
+        latitude: lat,
+        address: 'Here it will have the address from the api result.',
+      );
       _isGettingLocation = false;
     });
-    print(locationData.longitude);
-    print(locationData.latitude);
+
+    widget.selectLocation(_pickedLocation!);
   }
 
   @override
@@ -53,6 +85,16 @@ class _LocationInputState extends State<LocationInput> {
             color: Theme.of(context).colorScheme.onBackground,
           ),
     );
+
+    if (_pickedLocation != null) {
+      //previewContent=Image.network(locationImage);
+      previewContent = Text(
+        locationImage,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+      );
+    }
     if (_isGettingLocation) {
       previewContent = const CircularProgressIndicator();
     }
