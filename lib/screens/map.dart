@@ -65,12 +65,13 @@ class _MyWidgetState extends State<MapScreen> {
       //   },
       // ),
       body: Center(
-          child: Text(
-        'This Feature not available now', 
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Theme.of(context).colorScheme.onBackground,
-            ),
-      )),
+        child: Text(
+          'This Feature not available now',
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+        ),
+      ),
     );
   }
 }
