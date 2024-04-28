@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:snap_savor/models/place.dart';
+//import 'package:snap_savor/screens/map.dart';
 
 class LocationInput extends StatefulWidget {
   const LocationInput({
@@ -25,7 +26,25 @@ class _LocationInputState extends State<LocationInput> {
     final lat = _pickedLocation!.latitude;
     final lng = _pickedLocation!.longitude;
     // return 'Here place the google map image api.';
-    return '$lat \n $lng';
+    return '$lat \n$lng';
+  }
+
+  Future<void> _savePlace(double latitude, double longitude) async {
+////////// ***** instal http package and also need a google map api ***** //////////
+    // final url = Uri.parse('Here it will have the google map api');
+    // final response = await http.get(url);
+    // final resData = json.decode(response.body);
+    // final address = resData['result'][0]['formatted_address'];
+    setState(() {
+      _pickedLocation = PlaceLocation(
+        longitude: latitude,
+        latitude: longitude,
+        address: 'Here it will have the address from the api result.',
+      );
+      _isGettingLocation = false;
+    });
+
+    widget.selectLocation(_pickedLocation!);
   }
 
   void _getCurrentLocation() async {
@@ -60,21 +79,22 @@ class _LocationInputState extends State<LocationInput> {
     if (lat == null || lng == null) {
       return;
     }
-    ////////// ***** instal http package and also need a google map api ***** //////////
-    // final url = Uri.parse('Here it will have the google map api');
-    // final response = await http.get(url);
-    // final resData = json.decode(response.body);
-    // final address = resData['result'][0]['formatted_address'];
-    setState(() {
-      _pickedLocation = PlaceLocation(
-        longitude: lng,
-        latitude: lat,
-        address: 'Here it will have the address from the api result.',
-      );
-      _isGettingLocation = false;
-    });
 
-    widget.selectLocation(_pickedLocation!);
+    _savePlace(lat, lng);
+  }
+
+  void _selectOnMap() async {
+    // final pickedLocation = await Navigator.of(context).push<LatLng>(
+    //   MaterialPageRoute(
+    //     builder: (context) => MapScreen(),
+    //   ),
+    // );
+
+    // if(pickedLocation==null){
+    //   return;
+    // }
+
+    // _savePlace(pickedLocation.lattitude, pickedLocation.longitude);
   }
 
   @override
@@ -121,7 +141,7 @@ class _LocationInputState extends State<LocationInput> {
               label: const Text('Get current Location'),
             ),
             TextButton.icon(
-              onPressed: () {},
+              onPressed: _selectOnMap,
               icon: const Icon(Icons.map),
               label: const Text('Select on Map'),
             ),

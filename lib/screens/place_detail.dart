@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_savor/models/place.dart';
+//import 'package:snap_savor/screens/map.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
   const PlaceDetailScreen({
@@ -37,9 +38,19 @@ class PlaceDetailScreen extends StatelessWidget {
             child: Column(
               children: [
                 // circleAvatar will have the map displayed on it as a backgroung image and can tap it to see all once there is google map api
-                // CircleAvatar(
-                //   radius: 70,
-                //   backgroundImage: NetworkImage(locationImage),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.of(context).push(MaterialPageRoute(
+                //       builder: (context) => const MapScreen(
+                //         // location: place.location,
+                //         isSelecting: false,
+                //       ),
+                //     ));
+                //   },
+                //   child: CircleAvatar(
+                //     radius: 70,
+                //     backgroundImage: NetworkImage(locationImage),
+                //   ),
                 // ),
                 const CircleAvatar(),
                 Container(
