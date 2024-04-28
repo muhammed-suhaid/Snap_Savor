@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_savor/models/place.dart';
-//import 'package:snap_savor/screens/map.dart';
+import 'package:snap_savor/screens/map.dart';
 
 class PlaceDetailScreen extends StatelessWidget {
   const PlaceDetailScreen({
@@ -52,7 +52,14 @@ class PlaceDetailScreen extends StatelessWidget {
                 //     backgroundImage: NetworkImage(locationImage),
                 //   ),
                 // ),
-                const CircleAvatar(),
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const MapScreen(),
+                    ),
+                  ),
+                  child: const CircleAvatar(),
+                ),
                 Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(

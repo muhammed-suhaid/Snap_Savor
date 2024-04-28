@@ -64,7 +64,13 @@ class _MyWidgetState extends State<MapScreen> {
       //     ),
       //   },
       // ),
-      body: const Text('First have a cresit card and get the google map api'),
+      body: Center(
+          child: Text(
+        'This Feature not available now', 
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+      )),
     );
   }
 }
