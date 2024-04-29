@@ -1,4 +1,4 @@
-# snap_savor
+#  📸 Snap Savor: Your Personalized Place Manager
 
 A new Flutter project.
 
